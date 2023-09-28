@@ -1,0 +1,21 @@
+
+Alice (envia arquivo)
+    - Gera o par de chaves RSA (integridade)
+    - Conectar no Bob e receber a chave pública do Bob.
+    - Gerar a chave AES (chave de sessão)
+    - Criptografar o arquivo com a chave AES
+    - Criptografar a chave AES com a chave pública Bob.
+    - Empacotar num ObjetoTroca toda a informação que vai ser enviada ao Bob (arquivo cripto,chave de sessão cripto, chave pública Alice) e converter para byte[]
+    - Gerar o hash SHA-256 do objeto byte[]
+    - Criptografa o resumo/hash com a chave privada Alice (assinatura)
+    - Colocar a assinatura junto no objetoTroca.
+    - Envia o objetoTroca ao Bob
+Bob (recebe o arquivo)
+    - Gera o par de chaves RSA (confidencialidade)
+    - Recebe a conexão da Alice e envia sua chave pública.
+    - Recebe o ObjetoTroca.
+    - Retirar a assinatura do ObjetoTroca e descriptografa com a chave pública da Alice (que veio junto) Converte o objetoTroca para byte[] e gera o hash SHA-256 deste byte[].
+    - Compara o hash gerado por Bob com a assinatura descriptografada (se forem diferentes, termina o programa)
+    - Descriptografar a chave de sessão com a chave privada do Bob.
+    - Descriptografar o arquivo com a chave de sessão.
+    - Salvar o arquivo
